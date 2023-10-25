@@ -1,3 +1,5 @@
+// once endpoints have been finalized, make sure passing the API calls the correct information
+
 const getAllProjects = () => new Promise((resolve, reject) => {
   fetch('{endpointTBD, put it in ``}', {
     method: 'GET',
