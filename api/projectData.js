@@ -1,58 +1,30 @@
 // once endpoints have been finalized, make sure passing the API calls the correct information
 
+import { clientCredentials } from '../utils/client';
+
+const endpoint = clientCredentials.databaseURL;
+
 const getAllProjects = () => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
+  fetch(`${endpoint}/api/projects`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
+      } else {
+        resolve([]);
+      }
+    })
     .catch(reject);
 });
 
-const getSingleProject = () => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
+const getSingleProject = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projects/${id}`, {
     method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
-    .catch(reject);
-});
-
-const createProject = (payload) => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
-    .catch(reject);
-});
-
-const updateProject = (payload) => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
-    .catch(reject);
-});
-
-const deleteProject = () => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
-    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -62,20 +34,45 @@ const deleteProject = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getProjectByCategory = () => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
-    method: 'GET',
+const createProject = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projects`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const updateProject = (payload) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projects/${payload.projectId}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
+const deleteProject = (projectId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projects/${projectId}`, {
+    method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then(resolve)
     .catch(reject);
 });
 
-const getProjectByMembers = () => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
+const getProjectsByCategory = (categoryId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projectsbycategory/${categoryId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -87,5 +84,5 @@ const getProjectByMembers = () => new Promise((resolve, reject) => {
 });
 
 export {
-  getAllProjects, getSingleProject, createProject, updateProject, deleteProject, getProjectByCategory, getProjectByMembers,
+  getAllProjects, getSingleProject, createProject, updateProject, deleteProject, getProjectsByCategory,
 };

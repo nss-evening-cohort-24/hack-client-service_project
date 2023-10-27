@@ -1,27 +1,28 @@
-// once endpoints have been finalized, make sure passing the API calls the correct information
+import { clientCredentials } from '../utils/client';
+
+const endpoint = clientCredentials.databaseURL;
 
 const addMemberToProject = (payload) => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
-    method: 'PATCH',
+  fetch(`${endpoint}/api/projectusers/${payload.projectId}/${payload.userId}`, {
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
   })
     .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
-const deleteMemberFromProject = () => new Promise((resolve, reject) => {
-  fetch('{endpointTBD, put it in ``}', {
+const deleteMemberFromProject = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projectusers/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
+    .then(resolve)
     .catch(reject);
 });
 
