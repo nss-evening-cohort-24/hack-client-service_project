@@ -16,24 +16,18 @@ export default function Projects() {
     getUserById(user[0].uid).then((data) => setMember(data));
   }, []);
 
-  if (member?.isStaff === true) {
-    return (
-      <>
+  return (
+    <>
+      {member?.isStaff === true ? (
         <div
           className="projects-page"
           style={{ padding: '30px' }}
         >
           {proj.map((projects) => (
             <StaffProjectCard key={projects.id} projObj={projects} />
-          ))}
+          ))};
         </div>
-      </>
-    );
-  }
-
-  if (member?.isStaff === false) {
-    return (
-      <>
+      ) : (
         <div
           className="projects-page"
           style={{ padding: '30px' }}
@@ -42,7 +36,7 @@ export default function Projects() {
             <UserProjectCard key={projects.id} projObj={projects} />
           ))}
         </div>
-      </>
-    );
-  }
+      )}
+    </>
+  );
 }
