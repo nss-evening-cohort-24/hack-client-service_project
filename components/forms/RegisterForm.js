@@ -1,39 +1,133 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { registerUser } from '../../utils/auth'; // Update with path to registerUser
+import { useRouter } from 'next/router';
+import { createUser, updateUser } from '../../api/userData';
 
-function RegisterForm({ user, updateUser }) {
+function RegisterForm({ userObj }) {
+  const router = useRouter();
+
   const [formData, setFormData] = useState({
-    bio: '',
-    uid: user.uid,
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    profilePic: '',
+    isStaff: 'false',
+    uid: userObj.uid,
+    projects: userObj.projects || [],
   });
+
+  useEffect(() => {
+    if (userObj.id) setFormData(userObj);
+  }, [userObj.id]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerUser(formData).then(() => updateUser(user.uid));
+    if (userObj.id) {
+      updateUser(formData).then(() => router.push('/'));
+    } else {
+      createUser(formData).then(() => router.push('/'));
+    }
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Gamer Bio</Form.Label>
-        <Form.Control as="textarea" name="bio" required placeholder="Enter your Bio" onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))} />
-        <Form.Text className="text-muted">Let other gamers know a little bit about you...</Form.Text>
+        <Form.Label>First Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="firstName"
+          value={formData.firstName}
+          placeholder="Enter your First Name"
+          onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+          required
+        />
       </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Last Name</Form.Label>
+        <Form.Control
+          type="text"
+          name="lastName"
+          value={formData.lastName}
+          placeholder="Enter your Last Name"
+          onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+          required
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Email</Form.Label>
+        <Form.Control
+          type="text"
+          name="email"
+          value={formData.email}
+          placeholder="Enter your Email"
+          onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+          required
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Phone Number</Form.Label>
+        <Form.Control
+          type="text"
+          name="phoneNumber"
+          value={formData.phoneNumber}
+          placeholder="Enter your Phone Number"
+          onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+          required
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Profile Pic</Form.Label>
+        <Form.Control
+          type="text"
+          name="profilePic"
+          value={formData.profilePic}
+          placeholder="Enter your Profile Pic Url"
+          onChange={({ target }) => setFormData((prev) => ({ ...prev, [target.name]: target.value }))}
+          required
+        />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        <Form.Check
+          type="switch"
+          label="Are you staff?"
+          name="isStaff"
+          checked={formData.isStaff}
+          onChange={(e) => {
+            setFormData((prevState) => ({
+              ...prevState,
+              isStaff: e.target.checked,
+            }));
+          }}
+        />
+      </Form.Group>
+
       <Button variant="primary" type="submit">
-        Submit
+        {userObj.id ? 'Update Profile' : 'Create Profile'}
       </Button>
     </Form>
   );
 }
 
 RegisterForm.propTypes = {
-  user: PropTypes.shape({
-    uid: PropTypes.string.isRequired,
+  userObj: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    email: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    profilePic: PropTypes.string,
+    isStaff: PropTypes.bool,
+    id: PropTypes.number,
+    uid: PropTypes.string,
+    projects: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
-  updateUser: PropTypes.func.isRequired,
 };
 
 export default RegisterForm;
