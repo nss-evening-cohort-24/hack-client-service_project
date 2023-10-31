@@ -20,3 +20,8 @@ a {
 body {
   background-color: #073b4c;
 }
+
+.projects-page {
+  display: flex;
+  justify-content: space-around;
+}
