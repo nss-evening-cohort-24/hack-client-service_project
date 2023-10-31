@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 import { getUserProjects } from '../api/userData';
-import ProjectCard from '../components/cards/ProjectCard';
+import StaffProjectCard from '../components/cards/StaffProjectCard';
 
 function Home() {
   const [projects, setProjects] = useState([]);
@@ -37,7 +37,7 @@ function Home() {
       </Button>
       <div>
         {projects.map((project) => (
-          <ProjectCard projObj={project} onUpdate={userProjects} />
+          <StaffProjectCard key={projects.id} projObj={project} onUpdate={userProjects} />
         ))}
       </div>
 
