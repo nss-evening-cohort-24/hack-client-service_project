@@ -14,7 +14,7 @@ const getAllProjects = () => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => {
       if (data) {
-        resolve((data));
+        resolve(Object.values(data));
       } else {
         resolve([]);
       }
@@ -81,6 +81,18 @@ const getProjectsByCategory = (categoryId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getCategoriesWithProjects = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/categories`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
 export {
-  getAllProjects, getSingleProject, createProject, updateProject, deleteProject, getProjectsByCategory,
+  getAllProjects, getSingleProject, createProject, updateProject, deleteProject, getProjectsByCategory, getCategoriesWithProjects,
 };

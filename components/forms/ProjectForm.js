@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-import { createProject, getAllProjects, updateProject } from '../../api/projectData';
+import { createProject, getCategoriesWithProjects, updateProject } from '../../api/projectData';
 
 const initialState = {
   name: '',
@@ -10,9 +10,8 @@ const initialState = {
   location: '',
   image: '',
   date: '',
-  startTime: '',
   duration: '',
-  categoryId: '',
+  categoryId: 0,
 };
 
 function ProjectForm({ projObj }) {
@@ -21,7 +20,7 @@ function ProjectForm({ projObj }) {
   const router = useRouter();
 
   useEffect(() => {
-    getAllProjects().then(setCategories);
+    getCategoriesWithProjects().then(setCategories);
 
     if (projObj.id) setFormInput(projObj);
   }, [projObj]);
@@ -37,21 +36,22 @@ function ProjectForm({ projObj }) {
     e.preventDefault();
 
     if (projObj.id) {
-      updateProject(formInput).then(() => router.push(`/project/${projObj.id}`));
+      updateProject(formInput).then(() => router.push('/projects'));
     } else {
       const payload = { ...formInput };
 
       createProject(payload).then(() => router.push('/projects'));
     }
   };
+
   return (
     <>
-      <h3>Add a Service Project</h3>
+      <h3>{projObj.id ? 'Update' : 'Create'} a Service Project</h3>
       <div>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Service Project Name</Form.Label>
-            <Form.Control type="text" name="name" value={formInput.name} onChange={handleChange} required />
+            <Form.Control type="text" name="name" value={formInput.name} onChange={handleChange} />
           </Form.Group>
           <Form.Group className="mb-3">
             <Form.Label>Image URL</Form.Label>
@@ -74,22 +74,23 @@ function ProjectForm({ projObj }) {
             <Form.Control type="text" name="duration" value={formInput.duration} onChange={handleChange} required />
           </Form.Group>
           <Form.Group>
+            <Form.Label>Category</Form.Label>
             <Form.Select
               aria-label="Category"
               name="categoryId"
               onChange={handleChange}
               className="mb-3"
-              value={projObj.categoryId}
+              value={formInput.categoryId}
               required
             >
               <option value="">Select a Category</option>
               {
             categories.map((category) => (
               <option
-                key={category.categoryId}
-                value={category.firebaseKey}
+                key={category.id}
+                value={category.id}
               >
-                {category.category.type}
+                {category.type}
               </option>
             ))
           }
@@ -111,7 +112,6 @@ ProjectForm.propTypes = {
     location: PropTypes.string,
     image: PropTypes.string,
     date: PropTypes.string,
-    startTime: PropTypes.string,
     duration: PropTypes.string,
     id: PropTypes.number,
     categoryId: PropTypes.number,
