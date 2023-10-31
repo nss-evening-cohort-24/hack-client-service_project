@@ -14,7 +14,7 @@ function StaffProjectCard({ projObj, onUpdate }) {
   return (
     <div>
       <Card style={{ width: '20rem' }}>
-        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Img variant="top" src={projObj.image} alt={projObj.name} />
         <Card.Body>
           <Card.Title>{projObj.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{projObj.location}</Card.Subtitle>
@@ -38,6 +38,7 @@ StaffProjectCard.propTypes = {
   projObj: PropTypes.shape({
     name: PropTypes.string,
     location: PropTypes.string,
+    image: PropTypes.string,
     date: PropTypes.string,
     category: PropTypes.string,
     description: PropTypes.string,
