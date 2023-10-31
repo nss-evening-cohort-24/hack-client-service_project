@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-import { createProject, updateProject } from '../../api/projectData';
+import { createProject, getAllProjects, updateProject } from '../../api/projectData';
 
 const initialState = {
   name: '',
@@ -12,11 +12,19 @@ const initialState = {
   date: '',
   startTime: '',
   duration: '',
+  categoryId: '',
 };
 
 function ProjectForm({ projObj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [categories, setCategories] = useState([]);
   const router = useRouter();
+
+  useEffect(() => {
+    getAllProjects().then(setCategories);
+
+    if (projObj.id) setFormInput(projObj);
+  }, [projObj]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,17 +74,25 @@ function ProjectForm({ projObj }) {
             <Form.Control type="text" name="duration" value={formInput.duration} onChange={handleChange} required />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Category</Form.Label>
-            <Form.Select aria-label="Default select example">
-              <option>Select From Dropdown</option>
-              <option value="1">Adult Education</option>
-              <option value="2">Arts and Culture</option>
-              <option value="3">Civic & Community</option>
-              <option value="4">Disaster & Emergency Services</option>
-              <option value="5">Food Insecurity</option>
-              <option value="6">Housing & Homelessness</option>
-              <option value="7">Imigrant & Refugee Services</option>
-              <option value="8">Older Adult Services</option>
+            <Form.Select
+              aria-label="Category"
+              name="categoryId"
+              onChange={handleChange}
+              className="mb-3"
+              value={projObj.categoryId}
+              required
+            >
+              <option value="">Select a Category</option>
+              {
+            categories.map((category) => (
+              <option
+                key={category.categoryId}
+                value={category.firebaseKey}
+              >
+                {category.category.type}
+              </option>
+            ))
+          }
             </Form.Select>
           </Form.Group>
           <Button variant="primary" type="submit">
@@ -98,6 +114,7 @@ ProjectForm.propTypes = {
     startTime: PropTypes.string,
     duration: PropTypes.string,
     id: PropTypes.number,
+    categoryId: PropTypes.number,
   }),
 };
 
