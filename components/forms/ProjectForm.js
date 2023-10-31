@@ -1,4 +1,4 @@
-import PropTypes, { number } from 'prop-types';
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ const initialState = {
   image: '',
   date: '',
   startTime: '',
-  duration: number,
+  duration: '',
 };
 
 function ProjectForm({ projObj }) {
@@ -33,7 +33,7 @@ function ProjectForm({ projObj }) {
     } else {
       const payload = { ...formInput };
 
-      createProject(payload).then(() => router.push(`/project/${projObj.id}`));
+      createProject(payload).then(() => router.push('/projects'));
     }
   };
   return (
@@ -96,7 +96,7 @@ ProjectForm.propTypes = {
     image: PropTypes.string,
     date: PropTypes.string,
     startTime: PropTypes.string,
-    duration: PropTypes.number,
+    duration: PropTypes.string,
     id: PropTypes.number,
   }),
 };
