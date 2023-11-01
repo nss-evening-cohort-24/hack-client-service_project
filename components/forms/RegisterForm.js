@@ -4,20 +4,21 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useRouter } from 'next/router';
 import { createUser, updateUser } from '../../api/userData';
+import { useAuth } from '../../utils/context/authContext';
 
+const initialState = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  phoneNumber: '',
+  profilePic: '',
+  isStaff: 'false',
+};
 function RegisterForm({ userObj }) {
   const router = useRouter();
+  const { user } = useAuth();
 
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    profilePic: '',
-    isStaff: 'false',
-    uid: userObj.uid,
-    projects: userObj.projects || [],
-  });
+  const [formData, setFormData] = useState(initialState);
 
   useEffect(() => {
     if (userObj.id) setFormData(userObj);
@@ -28,7 +29,7 @@ function RegisterForm({ userObj }) {
     if (userObj.id) {
       updateUser(formData).then(() => router.push('/'));
     } else {
-      createUser(formData).then(() => router.push('/'));
+      createUser({ ...formData, uid: user.uid }).then(() => router.push('/'));
     }
   };
 
@@ -127,7 +128,10 @@ RegisterForm.propTypes = {
     id: PropTypes.number,
     uid: PropTypes.string,
     projects: PropTypes.arrayOf(PropTypes.string),
-  }).isRequired,
+  }),
+};
+RegisterForm.defaultProps = {
+  userObj: initialState,
 };
 
 export default RegisterForm;

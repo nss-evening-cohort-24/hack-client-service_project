@@ -15,23 +15,24 @@ export default function ViewSingleProject() {
   const { id } = router.query;
   const { user } = useAuth();
 
-  const project = () => {
+  const projects = () => {
     getSingleProject(id).then(setProjectDetails);
   };
 
-  const addToProject = (projectId, userId) => {
-    const payload = { projectId, userId };
-    addMemberToProject(payload).then(project());
+  const addToProject = () => {
+    // const payload = { projectId: id, userId: currentUser.id };
+    addMemberToProject(id, currentUser.id);
   };
 
-  const removeFromProject = (projectId) => {
-    deleteMemberFromProject(projectId).then(project());
+  const removeFromProject = (e) => {
+    console.warn(e);
+    deleteMemberFromProject(e.target.id);
   };
 
   useEffect(() => {
     getUserById(user.uid).then(setCurrentUser);
-    project();
-  });
+    projects();
+  }, [projectDetails.users]);
 
   return (
     <div>
@@ -44,9 +45,8 @@ export default function ViewSingleProject() {
       <h3>{projectDetails.category}</h3>
       <div>
         <div>
-          {currentUser.projects?.id === projectDetails.id ? (
-            <Button onClick={() => removeFromProject(projectDetails.id)}>Uncommit</Button>) : (
-              <Button onClick={() => addToProject(projectDetails.id, user[0].id)}>Commit</Button>)}
+          <Button type="button" onClick={removeFromProject}>Uncommit</Button>) : (
+          <Button type="button" onClick={addToProject}>Commit</Button>)
         </div>
         {projectDetails.users?.map((pdUser) => (
           <MemberCard userObj={pdUser} />
