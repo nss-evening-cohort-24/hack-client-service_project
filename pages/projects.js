@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { getAllProjects, getProjectsByCategory } from '../api/projectData';
+import { getAllProjects, getCategoriesWithProjects, getProjectsByCategory } from '../api/projectData';
 import StaffProjectCard from '../components/cards/StaffProjectCard';
 import UserProjectCard from '../components/cards/UserProjectCard';
 import { getUserById } from '../api/userData';
@@ -12,9 +14,14 @@ export default function Projects() {
   const [proj, setProj] = useState([]);
   const [member, setMember] = useState({});
   const [cats, setCats] = useState([]);
+  const [filtered, setFiltered] = useState([]);
 
   const getCatButtons = () => {
-    getProjectsByCategory(cats.id).then(setCats);
+    getCategoriesWithProjects().then(setCats);
+  };
+
+  const filteredProjects = (id) => {
+    getProjectsByCategory(id).then(setFiltered);
   };
 
   useEffect(() => {
@@ -27,7 +34,7 @@ export default function Projects() {
     <>
       <div>
         {cats.map((category) => (
-          <CategoryButton key={category.id} catObj={category} onClick={getCatButtons} />
+          <CategoryButton key={category.id} catObj={category} onClick={filteredProjects} />
         ))}
       </div>
       <div>

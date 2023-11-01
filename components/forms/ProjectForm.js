@@ -36,6 +36,7 @@ function ProjectForm({ projObj }) {
     e.preventDefault();
 
     if (projObj.id) {
+      console.warn(projObj.id);
       updateProject(formInput).then(() => router.push('/projects'));
     } else {
       const payload = { ...formInput };

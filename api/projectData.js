@@ -47,7 +47,7 @@ const createProject = (payload) => new Promise((resolve, reject) => {
 });
 
 const updateProject = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/projects/${payload.projectId}`, {
+  fetch(`${endpoint}/api/projects/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -69,13 +69,14 @@ const deleteProject = (projectId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getProjectsByCategory = (categoryId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/projectsbycategory/${categoryId}`, {
+const getProjectsByCategory = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projectsbycategory/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
+    .then((response) => response.json())
     .then((data) => resolve(Object.values(data)))
     .catch(reject);
 });
