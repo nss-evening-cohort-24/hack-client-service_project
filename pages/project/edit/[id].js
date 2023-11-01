@@ -1,7 +1,18 @@
-import React from 'react';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import ProjectForm from '../../../components/forms/ProjectForm';
+import { getSingleProject } from '../../../api/projectData';
 
-export default function ViewProjectDetails() {
+export default function EditProject() {
+  const [editProjectInfo, setProjectInfo] = useState({});
+  const router = useRouter();
+  const { id } = router.query;
+
+  useEffect(() => {
+    getSingleProject(id).then(setProjectInfo);
+  }, [id]);
+
   return (
-    <h1>EDIT PROJECT</h1>
+    <ProjectForm projObj={editProjectInfo} />
   );
 }

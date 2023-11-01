@@ -14,7 +14,7 @@ const getAllProjects = () => new Promise((resolve, reject) => {
     .then((response) => response.json())
     .then((data) => {
       if (data) {
-        resolve((data));
+        resolve(Object.values(data));
       } else {
         resolve([]);
       }
@@ -47,7 +47,7 @@ const createProject = (payload) => new Promise((resolve, reject) => {
 });
 
 const updateProject = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/projects/${payload.projectId}`, {
+  fetch(`${endpoint}/api/projects/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -69,8 +69,20 @@ const deleteProject = (projectId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getProjectsByCategory = (categoryId) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/projectsbycategory/${categoryId}`, {
+const getProjectsByCategory = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projectsbycategory/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
+
+const getCategoriesWithProjects = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/categories`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -82,5 +94,5 @@ const getProjectsByCategory = (categoryId) => new Promise((resolve, reject) => {
 });
 
 export {
-  getAllProjects, getSingleProject, createProject, updateProject, deleteProject, getProjectsByCategory,
+  getAllProjects, getSingleProject, createProject, updateProject, deleteProject, getProjectsByCategory, getCategoriesWithProjects,
 };

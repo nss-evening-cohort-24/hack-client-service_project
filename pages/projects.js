@@ -1,10 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
-import { getAllProjects } from '../api/projectData';
+import { getAllProjects, getCategoriesWithProjects, getProjectsByCategory } from '../api/projectData';
 import StaffProjectCard from '../components/cards/StaffProjectCard';
 import UserProjectCard from '../components/cards/UserProjectCard';
 import { getUserById } from '../api/userData';
 import { useAuth } from '../utils/context/authContext';
+import CategoryButton from '../components/CategoryButton';
 
 export default function Projects() {
   const { user } = useAuth();
@@ -18,25 +21,27 @@ export default function Projects() {
 
   return (
     <>
-      {member?.isStaff === true ? (
-        <div
-          className="projects-page"
-          style={{ padding: '30px' }}
-        >
-          {proj.map((projects) => (
-            <StaffProjectCard key={projects.id} projObj={projects} />
-          ))};
-        </div>
-      ) : (
-        <div
-          className="projects-page"
-          style={{ padding: '30px' }}
-        >
-          {proj.map((projects) => (
-            <UserProjectCard key={projects.id} projObj={projects} />
-          ))}
-        </div>
-      )}
+      <div>
+        {member?.isStaff === true ? (
+          <div
+            className="projects-page"
+            style={{ padding: '30px' }}
+          >
+            {proj.map((projects) => (
+              <StaffProjectCard key={projects.id} projObj={projects} />
+            ))};
+          </div>
+        ) : (
+          <div
+            className="projects-page"
+            style={{ padding: '30px' }}
+          >
+            {proj.map((projects) => (
+              <UserProjectCard key={projects.id} projObj={projects} />
+            ))}
+          </div>
+        )}
+      </div>
     </>
   );
 }
