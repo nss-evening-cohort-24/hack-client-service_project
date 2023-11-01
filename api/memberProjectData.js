@@ -3,7 +3,7 @@ import { clientCredentials } from '../utils/client';
 const endpoint = clientCredentials.databaseURL;
 
 const addMemberToProject = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/projectusers/${payload.projectId}/${payload.userId}`, {
+  fetch(`${endpoint}/api/projectusers/${payload.projectsId}/${payload.usersId}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
