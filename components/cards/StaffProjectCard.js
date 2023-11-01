@@ -29,7 +29,6 @@ function StaffProjectCard({ projObj }) {
           <Button className="proj-details-btn" href={`/project/${projObj.id}`} passhref>Details</Button>
           <Button className="proj-btn" href={`/project/edit/${projObj.id}`} passhref>Edit</Button>
           <Button className="proj-btn" onClick={deleteThisProject} onUpdate={getAllProjects}>Delete</Button>
-          <Button className="proj-btn">Sign Up</Button>
         </Card.Body>
       </Card>
     </div>

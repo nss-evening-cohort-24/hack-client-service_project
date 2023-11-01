@@ -13,30 +13,14 @@ export default function Projects() {
   const { user } = useAuth();
   const [proj, setProj] = useState([]);
   const [member, setMember] = useState({});
-  const [cats, setCats] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-
-  const getCatButtons = () => {
-    getCategoriesWithProjects().then(setCats);
-  };
-
-  const filteredProjects = (id) => {
-    getProjectsByCategory(id).then(setFiltered);
-  };
 
   useEffect(() => {
     getAllProjects().then((data) => setProj(data));
     getUserById(user[0].uid).then((data) => setMember(data));
-    getCatButtons();
   }, []);
 
   return (
     <>
-      <div>
-        {cats.map((category) => (
-          <CategoryButton key={category.id} catObj={category} onClick={filteredProjects} />
-        ))}
-      </div>
       <div>
         {member?.isStaff === true ? (
           <div
