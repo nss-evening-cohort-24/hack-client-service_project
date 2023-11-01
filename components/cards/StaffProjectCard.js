@@ -1,15 +1,30 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
+// import { useRouter } from 'next/router';
 import { deleteProject, getAllProjects } from '../../api/projectData';
+// import { useAuth } from '../../utils/context/authContext';
+// import { addMemberToProject } from '../../api/memberProjectData';
 
 function StaffProjectCard({ projObj }) {
+  // const user = useAuth();
+  // const router = useRouter();
+
   const deleteThisProject = () => {
     if (window.confirm(`Delete ${projObj.name}?`)) {
       deleteProject(projObj.id).then(getAllProjects);
     }
   };
+
+  // const signUpForProject = () => {
+  //   const payload = () => {
+  //     const usersId = user[0].id;
+  //     const projectsId = projObj.id;
+  //   };
+  //   addMemberToProject(payload).then(() => router.push('/'));
+  // };
 
   return (
     <div>
@@ -28,7 +43,7 @@ function StaffProjectCard({ projObj }) {
           <Button className="proj-details-btn" href={`/project/${projObj.id}`} passhref>Details</Button>
           <Button className="proj-btn" href={`/project/edit/${projObj.id}`} passhref>Edit</Button>
           <Button className="proj-btn" onClick={deleteThisProject} onUpdate={getAllProjects}>Delete</Button>
-
+          <Button className="proj-btn">Sign Up</Button>
         </Card.Body>
       </Card>
     </div>

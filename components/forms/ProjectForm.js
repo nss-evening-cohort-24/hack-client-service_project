@@ -10,7 +10,7 @@ const initialState = {
   location: '',
   image: '',
   date: '',
-  duration: '',
+  duration: 0,
   categoryId: 0,
 };
 
@@ -36,7 +36,6 @@ function ProjectForm({ projObj }) {
     e.preventDefault();
 
     if (projObj.id) {
-      console.warn(projObj.id);
       updateProject(formInput).then(() => router.push('/projects'));
     } else {
       const payload = { ...formInput };
@@ -113,7 +112,7 @@ ProjectForm.propTypes = {
     location: PropTypes.string,
     image: PropTypes.string,
     date: PropTypes.string,
-    duration: PropTypes.string,
+    duration: PropTypes.number,
     id: PropTypes.number,
     categoryId: PropTypes.number,
   }),
