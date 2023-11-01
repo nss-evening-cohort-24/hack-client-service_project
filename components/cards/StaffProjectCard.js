@@ -2,12 +2,12 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
-import { deleteProject } from '../../api/projectData';
+import { deleteProject, getAllProjects } from '../../api/projectData';
 
-function StaffProjectCard({ projObj, onUpdate }) {
+function StaffProjectCard({ projObj }) {
   const deleteThisProject = () => {
     if (window.confirm(`Delete ${projObj.name}?`)) {
-      deleteProject(projObj.id).then(() => onUpdate());
+      deleteProject(projObj.id).then(getAllProjects);
     }
   };
 
@@ -25,9 +25,10 @@ function StaffProjectCard({ projObj, onUpdate }) {
           <Card.Text>
             {projObj.description}
           </Card.Text>
-          <Button className="proj-details-btn" href={`/project/${projObj.id}`} passhref>View Project Details</Button>
+          <Button className="proj-details-btn" href={`/project/${projObj.id}`} passhref>Details</Button>
           <Button className="proj-btn" href={`/project/edit/${projObj.id}`} passhref>Edit</Button>
-          <Button className="proj-btn" onClick={deleteThisProject}>Delete</Button>
+          <Button className="proj-btn" onClick={deleteThisProject} onUpdate={getAllProjects}>Delete</Button>
+
         </Card.Body>
       </Card>
     </div>
