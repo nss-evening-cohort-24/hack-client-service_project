@@ -10,6 +10,7 @@ function StaffProjectCard({ projObj, onUpdate }) {
       deleteProject(projObj.id).then(() => onUpdate());
     }
   };
+  console.warn(projObj);
 
   return (
     <div>
@@ -20,14 +21,14 @@ function StaffProjectCard({ projObj, onUpdate }) {
           <Card.Subtitle className="mb-2 text-muted">{projObj.location}</Card.Subtitle>
           <Card.Subtitle className="mb-2 text-muted">{projObj.date}</Card.Subtitle>
           <Card.Text>
-            {projObj.category.type}
+            {/* {projObj.category.type} */}
           </Card.Text>
           <Card.Text>
             {projObj.description}
           </Card.Text>
-          <Button class="proj-details-btn" href={`/project/${projObj.id}`} passHref>View Project Details</Button>
-          <Button class="proj-btn" href={`/project/edit/${projObj.id}`} passHref>Edit</Button>
-          <Button class="proj-btn" onClick={deleteThisProject}>Delete</Button>
+          <Button className="proj-details-btn" href={`/project/${projObj.id}`} passHref>View Project Details</Button>
+          <Button className="proj-btn" href={`/project/edit/${projObj.id}`} passHref>Edit</Button>
+          <Button className="proj-btn" onClick={deleteThisProject}>Delete</Button>
         </Card.Body>
       </Card>
     </div>
