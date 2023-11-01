@@ -3,28 +3,14 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
-// import { useRouter } from 'next/router';
 import { deleteProject, getAllProjects } from '../../api/projectData';
-// import { useAuth } from '../../utils/context/authContext';
-// import { addMemberToProject } from '../../api/memberProjectData';
 
 function StaffProjectCard({ projObj }) {
-  // const user = useAuth();
-  // const router = useRouter();
-
   const deleteThisProject = () => {
     if (window.confirm(`Delete ${projObj.name}?`)) {
       deleteProject(projObj.id).then(getAllProjects);
     }
   };
-
-  // const signUpForProject = () => {
-  //   const payload = () => {
-  //     const usersId = user[0].id;
-  //     const projectsId = projObj.id;
-  //   };
-  //   addMemberToProject(payload).then(() => router.push('/'));
-  // };
 
   return (
     <div>
