@@ -14,6 +14,24 @@ export default function Projects() {
   const [proj, setProj] = useState([]);
   const [member, setMember] = useState({});
 
+  const [cats, setCats] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [isCategoryFiltered, setIsCategoryFiltered] = useState(false);
+
+  const getCatButtons = () => {
+    getCategoriesWithProjects().then(setCats);
+  };
+
+  const filteredProjects = (id) => {
+    getProjectsByCategory(id).then(setFiltered);
+    setIsCategoryFiltered(true);
+  };
+
+  const viewAllProjects = () => {
+    setIsCategoryFiltered(false);
+  };
+
+
   useEffect(() => {
     getAllProjects().then((data) => setProj(data));
     getUserById(user[0].uid).then((data) => setMember(data));
@@ -22,20 +40,25 @@ export default function Projects() {
   return (
     <>
       <div>
+        <CategoryButton key="viewAll" catObj={{ id: 'all', type: 'View All Projects' }} filteredProjects={viewAllProjects} />
+        {cats.map((category) => (
+          <CategoryButton key={category.id} catObj={category} filteredProjects={filteredProjects} />
+        ))}
+      </div>
+      <div>
+
         {member?.isStaff === true ? (
-          <div
-            className="projects-page"
-            style={{ padding: '30px' }}
-          >
-            {proj.map((projects) => (
-              <StaffProjectCard key={projects.id} projObj={projects} />
-            ))};
+          <div className="projects-page" style={{ padding: '30px' }}>
+            {isCategoryFiltered
+              ? filtered.map((projects) => (
+                <StaffProjectCard key={projects.id} projObj={projects} />
+              ))
+              : proj.map((projects) => (
+                <StaffProjectCard key={projects.id} projObj={projects} />
+              ))}
           </div>
         ) : (
-          <div
-            className="projects-page"
-            style={{ padding: '30px' }}
-          >
+          <div className="projects-page" style={{ padding: '30px' }}>
             {proj.map((projects) => (
               <UserProjectCard key={projects.id} projObj={projects} />
             ))}
