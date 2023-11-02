@@ -14,25 +14,39 @@ export default function ViewSingleProject() {
   const router = useRouter();
   const { id } = router.query;
   const { user } = useAuth();
+  const [button, setButton] = useState('');
 
-  const projects = () => {
-    getSingleProject(id).then(setProjectDetails);
+  const projects = async () => {
+    const array = await getSingleProject(id);
+    setProjectDetails(array);
   };
 
-  const addToProject = () => {
-    // const payload = { projectId: id, userId: currentUser.id };
-    addMemberToProject(id, currentUser.id);
+  const buttonCheck = () => {
+    const check = projectDetails.users?.find((obj) => obj.id === currentUser.id);
+    if (check) {
+      setButton('Uncommit');
+    } else {
+      setButton('Commit');
+    }
   };
 
-  const removeFromProject = (e) => {
-    console.warn(e);
-    deleteMemberFromProject(e.target.id);
+  const handleClick = () => {
+    const check = projectDetails.users.find((obj) => obj.id === currentUser.id);
+    if (check) {
+      deleteMemberFromProject(id, user.uid);
+      projects();
+    } else {
+      addMemberToProject(id, currentUser.id);
+      projects();
+    }
   };
 
   useEffect(() => {
-    getUserById(user.uid).then(setCurrentUser);
-    projects();
-  }, [projectDetails.users]);
+    getUserById(user.uid).then(setCurrentUser).then(() => {
+      projects();
+      buttonCheck();
+    });
+  }, [projectDetails.users, button]);
 
   return (
     <div>
@@ -45,8 +59,7 @@ export default function ViewSingleProject() {
       <h3>{projectDetails.category}</h3>
       <div>
         <div>
-          <Button type="button" onClick={removeFromProject}>Uncommit</Button>) : (
-          <Button type="button" onClick={addToProject}>Commit</Button>)
+          <Button type="button" onClick={handleClick}>{button}</Button>)
         </div>
         {projectDetails.users?.map((pdUser) => (
           <MemberCard userObj={pdUser} />

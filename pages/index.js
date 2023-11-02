@@ -15,7 +15,9 @@ function Home() {
   const { user } = useAuth();
 
   const userProjects = () => {
-    getUserProjects(user[0].id).then(setProjects);
+    if (user[0]) {
+      getUserProjects(user.uid).then(setProjects);
+    }
   };
 
   useEffect(() => {
@@ -26,24 +28,35 @@ function Home() {
   return (
     <> {user[0] === undefined ? (<RegisterForm />) : (
       <>
-        <h1>Hello {user.fbUser.displayName}! </h1>
-        <img src={user[0].profilePic} alt={[user[0].firstName, user[0].lastName]} style={{ width: '300px' }} />
-        <div>
-          <h3>{user[0].firstName} {user[0].lastName}</h3>
-          <p>{user[0].email}</p>
-          <p>{user[0].phoneNumber}</p>
-          <h6>{user[0].isStaff ? 'STAFF' : ''}</h6>
+        <div className="prof">
+          <div className="profileLeft">
+            <div className="homeWelcome profile">
+              <h1>Hello {user.fbUser.displayName}! </h1>
+            </div>
+            <div className="homeImg profile">
+              <img src={user[0].profilePic} alt={[user[0].firstName, user[0].lastName]} style={{ width: '300px' }} />
+            </div>
+          </div>
+          <div className="profileRight">
+            <div className="profileInfo profile">
+              <h3>{user[0].firstName} {user[0].lastName}</h3>
+              <p>{user[0].email}</p>
+              <p>{user[0].phoneNumber}</p>
+              <h6>{user[0].isStaff ? 'STAFF' : ''}</h6>
+            </div>
+            <div className="homeButtons profile">
+              <Link href={`/user/${user[0].id}}`} passHref>
+                <Button className="homeUpdate" variant="info">Update Profile</Button>
+              </Link>
+              <Button variant="danger" type="button" size="lg" className="copy-btn homeSO" onClick={signOut}>
+                Sign Out
+              </Button>
+            </div>
+          </div>
         </div>
-        <Link href={`/user/${user[0].id}}`} passHref>
-          <Button variant="info">Update Profile</Button>
-        </Link>
-        <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-          Sign Out
-        </Button>
-        <div>
-          {projects.map((project) => (
-            <StaffProjectCard key={projects.id} projObj={project} onUpdate={userProjects} />
-          ))}
+        <div className="homeProjects">
+          {projects.length ? projects.map((project) => (
+            <StaffProjectCard key={projects.id} projObj={project} onUpdate={userProjects} />)) : ('')}
         </div>
       </>
     )}

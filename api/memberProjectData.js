@@ -14,8 +14,8 @@ const addMemberToProject = (projectId, userId) => new Promise((resolve, reject) 
     .catch(reject);
 });
 
-const deleteMemberFromProject = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/api/projectusers/${id}`, {
+const deleteMemberFromProject = (projectId, userId) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/api/projectusers/${projectId}/${userId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
