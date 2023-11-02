@@ -13,6 +13,7 @@ export default function Projects() {
   const { user } = useAuth();
   const [proj, setProj] = useState([]);
   const [member, setMember] = useState({});
+
   const [cats, setCats] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [isCategoryFiltered, setIsCategoryFiltered] = useState(false);
@@ -30,10 +31,10 @@ export default function Projects() {
     setIsCategoryFiltered(false);
   };
 
+
   useEffect(() => {
     getAllProjects().then((data) => setProj(data));
     getUserById(user[0].uid).then((data) => setMember(data));
-    getCatButtons();
   }, []);
 
   return (
@@ -45,6 +46,7 @@ export default function Projects() {
         ))}
       </div>
       <div>
+
         {member?.isStaff === true ? (
           <div className="projects-page" style={{ padding: '30px' }}>
             {isCategoryFiltered

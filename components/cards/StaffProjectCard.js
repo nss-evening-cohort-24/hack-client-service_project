@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -28,7 +29,6 @@ function StaffProjectCard({ projObj }) {
           <Button className="proj-details-btn" href={`/project/${projObj.id}`} passhref>Details</Button>
           <Button className="proj-btn" href={`/project/edit/${projObj.id}`} passhref>Edit</Button>
           <Button className="proj-btn" onClick={deleteThisProject} onUpdate={getAllProjects}>Delete</Button>
-
         </Card.Body>
       </Card>
     </div>
