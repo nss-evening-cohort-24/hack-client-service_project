@@ -18,7 +18,7 @@ function UserProjectCard({ projObj }) {
           <Card.Text>
             {projObj.description}
           </Card.Text>
-          <Button id="proj-details-btn" href={`/project/${projObj.id}`} passHref>View Project Details</Button>
+          <Button id="proj-details-btn" href={`/project/${projObj.id}`}>View Project Details</Button>
         </Card.Body>
       </Card>
     </div>
