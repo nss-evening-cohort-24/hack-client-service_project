@@ -13,7 +13,7 @@ function Home() {
   const { user } = useAuth();
 
   const userProjects = () => {
-    getUserProjects(user[0].id).then(setProjects);
+    getUserProjects(user[0].uid).then(setProjects);
   };
 
   useEffect(() => {
