@@ -70,7 +70,6 @@ const deleteProject = (projectId) => new Promise((resolve, reject) => {
 });
 
 const getProjectsByCategory = (id) => new Promise((resolve, reject) => {
-  console.log('getProjectsByCategory invoked with category ID:', id);
   fetch(`${endpoint}/api/projectsbycategory/${id}`, {
     method: 'GET',
     headers: {
@@ -79,7 +78,6 @@ const getProjectsByCategory = (id) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      console.log('Projects for Category ID:', id, data);
       resolve(Object.values(data));
     })
     .catch(reject);

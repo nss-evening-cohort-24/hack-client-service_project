@@ -34,7 +34,10 @@ export default function Projects() {
   useEffect(() => {
     getAllProjects().then((data) => setProj(data));
     getUserById(user[0].uid).then((data) => setMember(data));
+    getCatButtons();
   }, []);
+
+  console.warn(cats);
 
   return (
     <>
