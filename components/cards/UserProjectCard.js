@@ -13,7 +13,7 @@ function UserProjectCard({ projObj }) {
           <Card.Subtitle className="mb-2 text-muted">{projObj.location}</Card.Subtitle>
           <Card.Subtitle className="mb-2 text-muted">{projObj.date}</Card.Subtitle>
           <Card.Text>
-            {projObj.category.type}
+            {projObj.category ? projObj.category.type : 'Category Not Available'}
           </Card.Text>
           <Card.Text>
             {projObj.description}

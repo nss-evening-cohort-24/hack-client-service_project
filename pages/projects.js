@@ -31,13 +31,18 @@ export default function Projects() {
     setIsCategoryFiltered(false);
   };
 
+  const onUpdate = () => {
+    getAllProjects().then((data) => setProj(data));
+    getUserById(user.uid).then((data) => setMember(data));
+  };
+
   useEffect(() => {
     getAllProjects().then((data) => setProj(data));
-    getUserById(user[0].uid).then((data) => setMember(data));
+    getUserById(user.uid).then((data) => setMember(data));
     getCatButtons();
   }, []);
 
-  console.warn(cats);
+  console.warn(filtered);
 
   return (
     <>
@@ -53,17 +58,21 @@ export default function Projects() {
           <div className="projects-page" style={{ padding: '30px' }}>
             {isCategoryFiltered
               ? filtered.map((projects) => (
-                <StaffProjectCard key={projects.id} projObj={projects} />
+                <StaffProjectCard key={projects.id} projObj={projects} onUpdate={onUpdate} />
               ))
               : proj.map((projects) => (
-                <StaffProjectCard key={projects.id} projObj={projects} />
+                <StaffProjectCard key={projects.id} projObj={projects} onUpdate={onUpdate} />
               ))}
           </div>
         ) : (
           <div className="projects-page" style={{ padding: '30px' }}>
-            {proj.map((projects) => (
-              <UserProjectCard key={projects.id} projObj={projects} />
-            ))}
+            {isCategoryFiltered
+              ? filtered.map((projects) => (
+                <UserProjectCard key={projects.id} projObj={projects} />
+              ))
+              : proj.map((projects) => (
+                <UserProjectCard key={projects.id} projObj={projects} />
+              ))}
           </div>
         )}
       </div>

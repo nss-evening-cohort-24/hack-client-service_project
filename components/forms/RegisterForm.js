@@ -13,9 +13,9 @@ const initialState = {
   email: '',
   phoneNumber: '',
   profilePic: '',
-  isStaff: 'false',
+  isStaff: false,
 };
-function RegisterForm({ userObj }) {
+function RegisterForm({ userObj, onUpdate }) {
   const router = useRouter();
   const { user } = useAuth();
 
@@ -23,14 +23,15 @@ function RegisterForm({ userObj }) {
 
   useEffect(() => {
     if (userObj.id) setFormData(userObj);
-  }, [userObj.id]);
+  }, [userObj]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userObj.id) {
       updateUser(formData).then(() => router.push('/'));
     } else {
-      createUser({ ...formData, uid: user.uid }).then(() => router.push('/'));
+      createUser({ ...formData, uid: user.uid }).then(() => onUpdate);
+      onUpdate();
     }
   };
 
@@ -130,6 +131,7 @@ RegisterForm.propTypes = {
     uid: PropTypes.string,
     projects: PropTypes.arrayOf(PropTypes.string),
   }),
+  onUpdate: PropTypes.func.isRequired,
 };
 RegisterForm.defaultProps = {
   userObj: initialState,
