@@ -9,7 +9,7 @@ export default function UpdateUser() {
   const [userObj, setUserObj] = useState({});
 
   useEffect(() => {
-    getUserById(user[0].uid).then(setUserObj);
+    getUserById(user.uid).then(setUserObj);
   }, []);
 
   return (

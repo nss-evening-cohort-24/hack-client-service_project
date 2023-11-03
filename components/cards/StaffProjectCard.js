@@ -5,10 +5,10 @@ import Card from 'react-bootstrap/Card';
 import PropTypes from 'prop-types';
 import { deleteProject, getAllProjects } from '../../api/projectData';
 
-function StaffProjectCard({ projObj }) {
+function StaffProjectCard({ projObj, onUpdate }) {
   const deleteThisProject = () => {
     if (window.confirm(`Delete ${projObj.name}?`)) {
-      deleteProject(projObj.id).then(getAllProjects);
+      deleteProject(projObj.id).then(onUpdate);
     }
   };
 
@@ -49,6 +49,7 @@ StaffProjectCard.propTypes = {
     description: PropTypes.string,
     id: PropTypes.number,
   }),
+  onUpdate: PropTypes.func.isRequired,
 }.isRequired;
 
 export default StaffProjectCard;
