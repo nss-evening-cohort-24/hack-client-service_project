@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 function UserProjectCard({ projObj }) {
   return (
-    <div>
-      <Card style={{ width: '20rem' }}>
+    <div className="userCard">
+      <Card className="card" style={{ width: '20rem' }}>
         <Card.Img variant="top" src="holder.js/100px180" />
         <Card.Body>
-          <Card.Title>{projObj.name}</Card.Title>
+          <Card.Title className="cardTitle">{projObj.name}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{projObj.location}</Card.Subtitle>
           <Card.Subtitle className="mb-2 text-muted">{projObj.date}</Card.Subtitle>
           <Card.Text>

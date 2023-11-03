@@ -31,11 +31,13 @@ export default function Projects() {
     setIsCategoryFiltered(false);
   };
 
-
   useEffect(() => {
     getAllProjects().then((data) => setProj(data));
     getUserById(user[0].uid).then((data) => setMember(data));
+    getCatButtons();
   }, []);
+
+  console.warn(cats);
 
   return (
     <>

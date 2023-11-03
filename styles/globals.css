@@ -18,10 +18,136 @@ a {
 }
 
 body {
-  background-color: #073b4c;
+  background-color: #1C4563;
 }
 
 .projects-page {
   display: flex;
   justify-content: space-around;
+}
+
+.homeWelcome h1 {
+  color: white;
+  font-size: 21px;
+  margin-top: 50px;
+}
+
+.homeImg img {
+  border: 2px solid #759571;
+  width: 936px;
+  height: 200.97px;
+  object-fit: cover;
+
+}
+
+.profileInfo {
+  display: inline-block;
+  color: white;
+  line-height: 50%;
+  flex-direction: column;
+}
+
+.profileInfo p {
+  font-size: 14px;
+  color: #BFC7CE;
+}
+
+.profileInfo h6 {
+  color: #F7665F;
+}
+
+.profileInfo h3 {
+  color: #BFC7CE;
+}
+
+.card {
+  background-color: #759571;
+  color: white;
+  border: 3px solid #759571;
+}
+
+.cardTitle {
+  font-size: 21px;
+}
+
+.mb-2 {
+  font-size: 14px;
+}
+
+.homeUpdate {
+  font-size: 14px;
+  width: 150px;
+  color: white;
+  background-color: #918E94;
+  margin-right: 15px;
+  border: .25 solid #BFC7CE;
+}
+
+/* .homeProjects {
+  display: flex;
+  justify-content: flex-end;
+} */
+
+.profile {
+  width: 350px;
+}
+
+.profileLeft {
+  position: relative;
+}
+
+.profileRight {
+  margin-top: 100px;
+}
+
+.prof {
+  display: flex;
+  margin-bottom: 50px;
+  justify-content: center;
+}
+
+.homeSO {
+  font-size: 14px;
+  width: 150px;
+  color: white;
+  height: 35px;
+  border: .25px solid #BFC7CE;
+  background-color: #C14343;
+}
+
+.homeProjects {
+  display: flex;
+  justify-content: space-around;
+}
+
+.proj {
+  background-color: #5B8BAA;
+  margin-right: 10px;
+}
+
+.cardBtns {
+  display: flex;
+  justify-content: center;
+}
+
+.cardDesc {
+  font-size: 12px;
+}
+
+.signOut {
+  position: absolute;
+  right: 15px;
+  height: 35px;
+  font-size: 12px;
+  background-color: #C14343;
+  border-color: #C14343;
+}
+
+.navLinks {
+  font-size: 14px;
+}
+
+.navTitle {
+  font-size: 16px;
+  letter-spacing: 2.5px;
 }
