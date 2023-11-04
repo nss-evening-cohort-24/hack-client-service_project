@@ -49,21 +49,30 @@ export default function ViewSingleProject() {
   }, [projectDetails.users, button]);
 
   return (
-    <div>
-      <img src={projectDetails.image} alt={projectDetails.name} />
-      <h1>{projectDetails.name}</h1>
-      <h3>{projectDetails.location}</h3>
-      <p>{projectDetails.date}</p>
-      <p>{projectDetails.duration}</p>
-      <h6>{projectDetails.description}</h6>
-      <h3>{projectDetails.category}</h3>
-      <div>
-        <div>
-          <Button type="button" onClick={handleClick}>{button}</Button>)
+    <div className="single">
+      <div className="singleDiv">
+        <div className="singleImg">
+          <img className="pImg" src={projectDetails.image} alt={projectDetails.name} />
         </div>
+        <div className="singleInfo">
+          <h1>{projectDetails.name}</h1>
+          <h3>Location: {projectDetails.location}</h3>
+          <p>Date: {projectDetails.date}</p>
+          <p>Duration: {projectDetails.duration} hour(s)</p>
+          <h6>{projectDetails.description}</h6>
+          <h3>{projectDetails.category}</h3>
+        </div>
+        <div>
+          <div>
+            <Button type="button" onClick={handleClick}>{button}</Button>
+          </div>
+        </div>
+      </div>
+      <div className="members">
+        <h4>Project Members</h4>
         {projectDetails.users?.map((pdUser) => (
           <MemberCard userObj={pdUser} />
-        ))};
+        ))}
       </div>
     </div>
   );
