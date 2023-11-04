@@ -1,44 +1,52 @@
-# React/Next.js Django Auth Template
+## Overview:
 
-## Topics
-- [Get Started](#getting-started)
-- [Starting the Project](#starting-the-project)
-___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+"Service Projects" is an innovative initiative designed to facilitate the pairing of volunteers with meaningful projects. This platform allows staff to create projects where volunteers can donate their time and efforts for various causes. By providing a user-friendly interface, Service Projects streamlines the process of connecting volunteers with opportunities that align with their interests and skills, fostering a stronger sense of community engagement and social impact. Whether it's supporting local charities, environmental conservation, or educational programs, Service Projects brings together a diverse group of volunteers and creates a more effective and efficient way to make a positive difference in the world.
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+## Features:
+- Google Authentication Login 
+- Create and Edit Users
+- Read All Projects and Project Details
+- Commit and Uncommit to Service Projects
+- Create and Edit a Project in your area
+- Delete a Project from the Database
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+## App Walk-Through:
 
-## Starting the Project
-1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
-1. Create a `.env` file at the root of the project
-1. Copy/Paste the contents of the `.env.sample` file to your newly created `.env` file.
-1. Copy over all of your Firebase values into the `.env` file.
-1. Open the `package.json` file and change the `name` property to the name of your application, and `author` to  your name.
-1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
-1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
-1. To start your application, run `npm run dev`. THIS IS THE COMMAND YOU WILL USE TO RUN YOUR DEVELOPMENT SERVER FROM NOW ON.
-1. Open [http://localhost:3000](http://localhost:3000) with your browser.
+### Sign - In and Create User:
+The application begins with the user needing to sign in using their Google account. Once a user is signed, new users to the app will be directed to create an account using the Register Form. This form gathers user contact information, image, and whether they are staff or not.  If the user has already signed in before, they will automatically be directed to the Home Page. 
 
-### If you see this, you are set to go!
-<img width="450" alt="Screen Shot 2022-07-06 at 1 07 27 PM" src="https://user-images.githubusercontent.com/29741570/177615077-9b6a75bc-0260-4d29-bb88-bd95a3140687.png">
+### Home Page and User Profile:
+The Home Page and My Profile page displays the user contact information gathered in the Register Form. The user is able to update their information by selecting “Update Profile”. The user is also able to see all projects they have signed up for. 
 
+### View All Projects Page:
+On this page, the user is able to see all projects. The cards will display slightly differently depending on whether the user is staff or not. The user is able to filter the available projects by category by selecting the corresponding button at the top of the page. If the user is a staff member, they are able to select “Edit” or “Delete” to either update or delete a project from the database. 
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### View Project Details:
+The View Project Details page displays a more detailed layout of the Service Project. This is also the page where the user is able to either “Commit” or “Uncommit” to a service project. If the user commits to the service project, their member card will display on the Project Details page. This also allows the user to see other members that have signed up for the project as well. If the user no longer wishes to be a part of the project, all they need to do is select “Uncommit” and they will be removed from the project. 
 
-**NOTES:** 
-- If you see the following error, you did not follow all the setup steps correctly and failed to add your Firebase creds. Go back and do that NOW.
+### Add A Project:
+With this page, the user is able to add a project to the database using the Project Form. This is the same form that is used to update an already available project. 
 
-<img width="1043" alt="Screen Shot 2022-07-06 at 11 18 45 AM" src="https://user-images.githubusercontent.com/29741570/177612501-c2628f18-4bbd-4de9-aae6-27ffba1172d6.png">
-        
-## Learn More about Next.js
-To learn more about Next.js, take a look at the following resources:
+## Relevant Links:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### [ERD](https://drawsql.app/teams/my-team-1210/diagrams/copy-of-hackathon-serviceproject-erd)
+### [Flow Chart](https://www.canva.com/design/DAFyIDMneio/oeqOriZnHeW_LgvxCVPlcQ/edit)
+
+## Tech Stack:
+
+### Front-End:
+React
+Next.js
+Javascript, HTML and CSS
+React Bootstrap 
+
+### Back-End:
+C# 
+.NET
+PostgreSQL
+
+## Engineers
+Kyle Blunt - https://github.com/Oktiv20
+Maggie Chafee -  https://github.com/MaggieChafee
+Joey Ebach - https://github.com/JoeyEbach
+Michael Estany - https://github.com/mestany2
