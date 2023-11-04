@@ -15,7 +15,7 @@ function UserProjectCard({ projObj }) {
           <Card.Text>
             {projObj.category ? projObj.category.type : 'Category Not Available'}
           </Card.Text>
-          <Card.Text>
+          <Card.Text className="cardDesc">
             {projObj.description}
           </Card.Text>
           <Button id="proj-details-btn" href={`/project/${projObj.id}`}>View Project Details</Button>

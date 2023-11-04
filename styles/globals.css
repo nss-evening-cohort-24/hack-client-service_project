@@ -64,6 +64,7 @@ body {
   background-color: #759571;
   color: white;
   border: 3px solid #759571;
+  margin-bottom: 25px;
 }
 
 .cardTitle {
@@ -82,11 +83,6 @@ body {
   margin-right: 15px;
   border: .25 solid #BFC7CE;
 }
-
-/* .homeProjects {
-  display: flex;
-  justify-content: flex-end;
-} */
 
 .profile {
   width: 350px;
@@ -132,6 +128,8 @@ body {
 
 .cardDesc {
   font-size: 12px;
+  height: 54px;
+  overflow: scroll;
 }
 
 .signOut {
@@ -139,8 +137,11 @@ body {
   right: 15px;
   height: 35px;
   font-size: 12px;
-  background-color: #C14343;
-  border-color: #C14343;
+  background-color: black;
+  border-color:#A1A3A1;
+  color:#A1A3A1;
+  
+  
 }
 
 .navLinks {
@@ -150,4 +151,127 @@ body {
 .navTitle {
   font-size: 16px;
   letter-spacing: 2.5px;
+}
+
+.projects-page {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card img {
+  width: 314px;
+  height: 157px;
+  object-fit: cover;
+}
+
+.catButtons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.catBtn {
+  margin-left: 15px;
+  background-color: #855569;
+  font-size: 12px;
+}
+
+.forms label {
+  color: #D9D3DD;
+  font-size: 12px;
+}
+
+.formTitle {
+  color: white;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.forms input, .forms select, .forms textarea, .forms switch {
+  background-color: #C1CDC6;
+  border: 2px solid black;
+  font-size: 12x;
+}
+
+.forms ::placeholder {
+  font-size: 12px;
+}
+
+.forms button {
+  background-color: #855569;
+  border-color: white;
+}
+
+.single {
+  margin: auto;
+}
+
+.pImg {
+ margin-top: 25px;
+ border: 2px solid #759571;
+ width: 400px;
+ height: 200.97px;
+ object-fit: cover;
+}
+
+.singleInfo {
+  color: white;
+}
+
+.singleInfo p, .singleInfo h6 {
+  font-size: 14px;
+  line-height: 50%;
+  color: #BFC7CE;
+}
+
+.singleInfo h3 {
+  color: #BFC7CE;
+}
+
+.single button {
+  background-color: #855569;
+  border-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.single h6 {
+  width: 400px;
+  line-height: 100%;
+  font-style: italic;
+}
+
+.memCard {
+  background-color: #759571;
+  color: white;
+  border: 3px solid #759571;
+  margin-bottom: 25px;
+}
+
+.memCard img {
+  height: 157px;
+  width: 283px;
+  object-fit: cover;
+}
+
+.memTitle {
+  font-size: 21px;
+  color: #4B524D;
+  
+}
+
+.memCard p {
+  line-height: 50%;
+  font-size: 12px;
+}
+
+.staff {
+  color: black;
+}
+
+.members h4 {
+  color: white;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }

@@ -46,9 +46,9 @@ function ProjectForm({ projObj }) {
 
   return (
     <>
-      <h3>{projObj.id ? 'Update' : 'Create'} a Service Project</h3>
+      <h3 className="formTitle">{projObj.id ? 'Update' : 'Create'} a Service Project</h3>
       <div>
-        <Form onSubmit={handleSubmit}>
+        <Form className="forms" onSubmit={handleSubmit}>
           <Form.Group className="mb-3">
             <Form.Label>Service Project Name</Form.Label>
             <Form.Control type="text" name="name" value={formInput.name} onChange={handleChange} />

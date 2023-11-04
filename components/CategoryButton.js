@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 
 export default function CategoryButton({ catObj, filteredProjects }) {
   return (
-    <Button variant="dark" onClick={() => filteredProjects(catObj.id)}>
+    <Button className="catBtn" variant="dark" onClick={() => filteredProjects(catObj.id)}>
       {catObj.type}
     </Button>
   );

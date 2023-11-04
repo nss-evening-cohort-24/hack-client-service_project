@@ -46,13 +46,13 @@ export default function Projects() {
 
   return (
     <>
-      <div>
+      <div className="catButtons">
         <CategoryButton key="viewAll" catObj={{ id: 'all', type: 'View All Projects' }} filteredProjects={viewAllProjects} />
         {cats.map((category) => (
           <CategoryButton key={category.id} catObj={category} filteredProjects={filteredProjects} />
         ))}
       </div>
-      <div>
+      <div className="projects">
 
         {member?.isStaff === true ? (
           <div className="projects-page" style={{ padding: '30px' }}>
